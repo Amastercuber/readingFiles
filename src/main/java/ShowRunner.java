@@ -14,7 +14,8 @@ public class ShowRunner {
         //we are done using them
         //we do not need to close the objects on our own
         //each object we make within the () is separated by a ;
-        try(){
+        try(FileReader in = new FileReader("shows.txt"); BufferedReader reader = new BufferedReader(in)){
+
 
             //we store data into a line variable within the while loop condition
             //because each time we call readLine it is pulling a line from the textfile
@@ -22,6 +23,14 @@ public class ShowRunner {
             //everything we pull from the textfile is a String unless we convert
             //it to something else later so even if we are reading out a number
             //from the file it will be read out as a String
+            String line;
+            int counter = 0;
+            while( (line = reader.readLine()) != null ){
+                String[] data = line.split("--");
+                TVShow show = new TVShow(data[0], data[2], data[3], data[4], data[5], data[6]);
+                showsList[counter] = show;
+                counter ++;
+            }
 
             //inside the while loop we are using the .split() method
             //this method will split a string by whatever we place inside
@@ -30,9 +39,11 @@ public class ShowRunner {
 
 
 
-        } catch() {
+        } catch(FileNotFoundException badFile) {
+            System.out.println("file not found");
 
-        } catch () {
+        } catch (IOException UhOh) {
+            System.out.println("cant read");
 
         }
 
