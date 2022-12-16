@@ -27,7 +27,7 @@ public class ShowRunner {
             int counter = 0;
             while( (line = reader.readLine()) != null ){
                 String[] data = line.split("--");
-                TVShow show = new TVShow(data[0], data[2], data[3], data[4], data[5], data[6]);
+                TVShow show = new TVShow(data[0], data[1], data[2], data[3], data[4], data[5]);
                 showsList[counter] = show;
                 counter ++;
             }
@@ -51,9 +51,13 @@ public class ShowRunner {
         printArr(showsList);
 
         //find all the comedy tv shows
+        System.out.println("Comedies");
+        printArr(findComedy(showsList));
 
         //find all the tv shows on a specific "network"
         //   we will use Netflix for the example
+        System.out.println("test Network");
+        printArr(networkShows(showsList, "Netflix"));
 
         //OPTIONAL EXTRA PRACTICE
         //we have the TVShow[] filled see
@@ -71,10 +75,27 @@ public class ShowRunner {
     }
 
     public static TVShow[] findComedy (TVShow[] showsArray) {
-
+        TVShow[] comedies = new TVShow[showsArray.length];
+        int numComedies = 0;
+        for(int i =0; i < showsArray.length; i++){
+            if(showsArray[i].getGenre().equals("Comedy")) {
+                comedies[numComedies] = showsArray[i];
+                numComedies++;
+            }
+        }
+        return comedies;
     }
 
     public static TVShow[] networkShows (TVShow[] showsArray, String network) {
+        TVShow[] netList = new TVShow[showsArray.length];
+        int index = 0;
+        for(int i =0; i < showsArray.length; i++){
+            if(network.equals(showsArray[i].getNetwork())) {
+                netList[index] = showsArray[i];
+                index++;
+            }
+        }
+        return netList;
 
     }
 }
