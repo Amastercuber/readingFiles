@@ -2,6 +2,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class ShowRunner {
     public static void main(String[] args) {
@@ -14,7 +16,7 @@ public class ShowRunner {
         //we are done using them
         //we do not need to close the objects on our own
         //each object we make within the () is separated by a ;
-        try(FileReader in = new FileReader("shows.txt"); BufferedReader reader = new BufferedReader(in)){
+        try(FileReader in = new FileReader("shows.txt"); BufferedReader reader = new BufferedReader(in); FileWriter file = new FileWriter("demo.txt", true); BufferedWriter writer = new BufferedWriter(file)){
 
 
             //we store data into a line variable within the while loop condition
